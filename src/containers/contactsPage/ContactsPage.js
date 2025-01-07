@@ -1,3 +1,6 @@
+
+
+// Import React & React Hooks
 import React, { useState, useEffect } from "react";
 
 import { ContactForm } from "../../components/contactForm/ContactForm";
@@ -8,6 +11,7 @@ export const ContactsPage = () => {
   Define state variables for 
   contact info and duplicate check
   */
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
