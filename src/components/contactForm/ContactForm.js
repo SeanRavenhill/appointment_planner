@@ -1,4 +1,7 @@
-import React from "react";
+
+
+// Import React
+import React from 'react';
 
 export const ContactForm = ({
   name,
@@ -7,10 +10,7 @@ export const ContactForm = ({
   setPhone,
   email,
   setEmail,
-  handleSubmit
+  handleSubmit,
 }) => {
-  return (
-    <></>
-  );
+  return <></>;
 };
-
