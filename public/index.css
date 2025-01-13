@@ -30,8 +30,8 @@ h2 {
   margin-bottom: 18px;
 }
 
-section {
-}
+/* section {
+} */
 
 hr {
   border: none;
@@ -58,6 +58,15 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+input[type="submit"]:hover {
+  background: #007ba7; /* Darker shade for hover */
+}
+
+input[type="submit"]:disabled {
+  background: #cccccc; /* Greyed-out button when disabled */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
 input,
 select {
   font-family: "Open Sans", sans-serif;
@@ -69,6 +78,10 @@ select {
   width: 100%;
   margin-bottom: 10px;
   box-sizing: border-box;
+}
+
+.input-warning {
+  border: 1px solid #ff0000;
 }
 
 .tile {
@@ -83,4 +96,11 @@ select {
 
 .tile-container {
   margin-bottom: 20px;
+}
+
+.error-message {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: -5px; /* Adjust spacing relative to inputs */
+  margin-bottom: 10px;
 }

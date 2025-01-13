@@ -7,38 +7,57 @@ import React, { useState, useEffect } from "react";
 import { ContactForm } from "../../components/contactForm/ContactForm";
 import { TileList } from "../../components/tileList/TileList";
 
+/*
+ContactsPage Component:
+  - Manages the state and logic for adding new contacts and displaying 
+    the contact list.
+  - Passes state variables and callback functions as props to child 
+    components (`ContactForm` and `TileList`).
+*/
+
 export const ContactsPage = ({ contacts, addContact }) => {
   /*
-  State variables:
-    - name: Stores name entered to form.
-    - phone: Stores phone number entered to form.
-    - email: Stores email entered to form.
+  State variables used to manage form data and validation:
+    - name: Tracks the name entered into the form.
+    - phone: Tracks the phone number entered into the form.
+    - email: Tracks the email address entered into the form.
+    - isDuplicate: Boolean flag indicating if the entered name already exists 
+      in the contacts array, updated dynamically with useEffect.
   */
   const [name, setName] = useState('');
   const [phone, setPhone] = useState(''); 
   const [email, setEmail] = useState('');
-  const [duplicateCheck, setDuplicateCheck] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(contacts.some(contact => contact.name === name));
 
+
+  /*
+  Handles form submission:
+    - Prevents default form behavior (e.g., page reload).
+    - Checks the `isDuplicate` flag to ensure duplicate names are not added.
+    - Calls the `addContact` function to add a new contact to the list.
+    - Resets the form inputs after successful submission.
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*
-    Add contact info and clear data
-    if the contact name is not a duplicate
-    */
-    if (!duplicateCheck) {
-      addContact({ name, phone, email });
+
+    if (!isDuplicate) {
+      addContact( name, phone, email );
       setName('');
       setPhone('');
       setEmail('');
-    } 
+    }
+    
   };
 
   /*
-  Using hooks, check for contact name in the 
-  contacts array variable in props
+  useEffect:
+    - Dynamically updates the `isDuplicate` state whenever the `contacts` array 
+      or `name` input changes.
+    - Ensures the form provides real-time feedback about duplicate names.
+    - Dependency array: Reactively listens to changes in `contacts` and `name`.
   */
   useEffect(() => {
-    setDuplicateCheck(contacts.some(contact => contact.name === name)); 
+    setIsDuplicate(contacts.some(contact => contact.name === name));
   }, [contacts, name]);
 
   return (
@@ -52,6 +71,7 @@ export const ContactsPage = ({ contacts, addContact }) => {
           setPhone={setPhone}
           email={email}
           setEmail={setEmail}
+          isDuplicate={isDuplicate}
           handleSubmit={handleSubmit}
         />
       </section>
