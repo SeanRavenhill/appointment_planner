@@ -1,10 +1,8 @@
-
-
 // Import React
-import React from "react";
+import React from 'react';
 
 // Import Tile component
-import { Tile } from "../../components/tile/Tile"
+import { Tile } from '../../components/tile/Tile';
 
 /*
 TileList Component:
@@ -30,7 +28,7 @@ Props:
 export const TileList = ({ items }) => {
   return (
     <div>
-       {/*
+      {/*
       Use the `map` method to iterate over the `items` array:
         - Destructure each item to extract the `name` property.
         - Use the rest operator (`...details`) to collect the remaining 
@@ -40,8 +38,13 @@ export const TileList = ({ items }) => {
         - Use a unique `key` for each Tile, falling back to `index` if 
           an `id` is not available.
       */}
-      {items.map((item ,{ name, ...details }, index) => 
-        <Tile key={item.id || index} name={name} description={Object.values(details)} />)}
+      {items.map(({ name, ...details }, index) => (
+        <Tile
+          key={details.id || index}
+          name={name}
+          description={Object.values(details)}
+        />
+      ))}
     </div>
   );
 };
