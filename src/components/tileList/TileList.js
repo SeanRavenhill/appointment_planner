@@ -35,12 +35,11 @@ export const TileList = ({ items }) => {
           key-value pairs from the object into a new `details` object.
         - Pass `name` and the values of `details` (converted to an array) 
           as props to the Tile component.
-        - Use a unique `key` for each Tile, falling back to `index` if 
-          an `id` is not available.
+        - Use the `index` of the array as the key, as the array order is stable.
       */}
       {items.map(({ name, ...details }, index) => (
         <Tile
-          key={details.id || index}
+          key={index}
           name={name}
           description={Object.values(details)}
         />
